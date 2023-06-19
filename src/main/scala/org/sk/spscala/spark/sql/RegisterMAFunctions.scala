@@ -11,12 +11,19 @@ import org.sk.spscala.spark.utils.Constants._
  * @param sqlContext
  */
 private[spark] case class RegisterMAFunctions(@transient sqlContext: SQLContext) extends LoggingTrait {
+  /**
+   * to register masking algorithm
+   * @param maskingAlgorithmName
+   * @param leftKey
+   * @param rightKey
+   * @param key
+   * @return SQLContext
+   */
 
   def registerMA(maskingAlgorithmName:String = DEFAULT_MASKING_ALGORITHM,leftKey:String = DEFAULT_LEFT_KEY,rightKey:String = DEFAULT_RIGHT_KEY,key:String=Thread.currentThread().getName): SQLContext = {
     AlgorithmNameHolder.register(maskingAlgorithmName,leftKey ,rightKey,key)
     val aDetails=AlgorithmNameHolder.getName(key)
     sqlContext.setConf(MASKING_ALGORITHM_KEY,new Gson().toJson(aDetails))
-    sqlContext.read.option("multiline", true).json("").createOrReplaceTempView("updated_paymentApproval")
     return sqlContext
   }
 

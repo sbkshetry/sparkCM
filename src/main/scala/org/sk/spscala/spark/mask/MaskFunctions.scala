@@ -10,6 +10,13 @@ import org.sk.spscala.spark.utils.Constants._
 
 private[spark] case class MaskFunctions(@transient dataFrame: DataFrame) extends LoggingTrait   {
 
+  /**
+   * to mask column data
+   * @param aDetails
+   * @param name
+   * @return
+   */
+
   private def getMaskColumn(aDetails: (String, String, String), name: String) : String={
     return s"cast( ${aDetails._2}(concat('${aDetails._1}','|',cast( $name as string),'|','${aDetails._3}') ${if(aDetails._2.equals("sha2"))",256" else ""}) as string) $name"
   }
