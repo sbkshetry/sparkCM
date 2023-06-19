@@ -6,7 +6,7 @@
 
     <groupId>org.sk.spscala</groupId>
     <artifactId>sparkCM</artifactId>
-    <version>0.0.1_beta</version>
+    <version>0.0.2_beta</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>SparkCM to do Column Masking of registered columns for any spark dataframe</description>
     <licenses>
@@ -42,12 +42,6 @@
             <artifactId>spark-core_${spark_scala_version}</artifactId>
             <scope>provided</scope>
             <version>${spark_version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -66,17 +60,17 @@
             <artifactId>spark-sql_${spark_scala_version}</artifactId>
             <version>${spark_version}</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>*</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.36</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-data-tables</artifactId>
+            <version>12.3.7</version>
             <scope>provided</scope>
         </dependency>
         <!-- Testing -->
@@ -123,6 +117,16 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <build>
         <pluginManagement>
             <plugins>
