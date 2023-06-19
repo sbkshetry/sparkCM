@@ -12,6 +12,7 @@ import org.sk.spscala.spark.utils.Constants._
 private[spark] case class UnRegisterMAFunctions(@transient sqlContext: SQLContext) extends LoggingTrait {
 
   def unRegisterMA(key:String=Thread.currentThread().getName): SQLContext = {
+
     AlgorithmNameHolder.unRegister(key)
     sqlContext.setConf(MASKING_ALGORITHM_KEY,EMPTY)
     return sqlContext
